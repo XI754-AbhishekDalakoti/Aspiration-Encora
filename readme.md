@@ -14,4 +14,3 @@ Have a JDK installed
 ##### **Execution**
 
 Right-click on any of the src file and click on the run command
-Uploading the Modified file on s3
