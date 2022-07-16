@@ -1,15 +1,15 @@
-Aspiration-Encora coding problems
+**Aspiration-Encora coding problems**
 
 This is the Java repository which contains two coding problems
 
-Instructions
+**Instructions**
 Clone the repo:
 Git:
 $ git clone git@github.com:XI754-AbhishekDalakoti/Aspiration-Encora.git
 
-Prerequisites
+**Prerequisites**
 Have a JDK installed
 
-Execution
+**Execution**
 Right-click on any of the src file and click on the run command
 Uploading the Modified file on s3
