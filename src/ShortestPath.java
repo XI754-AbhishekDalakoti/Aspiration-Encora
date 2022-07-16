@@ -1,5 +1,5 @@
-
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ShortestPath {
 
@@ -9,13 +9,13 @@ public class ShortestPath {
     static int dim_col[] = {0, 1, 0, -1};
 
     static class pointCoordinates {
-        int x, y, z;
+        int firstCoordinate, secondCoordinate,thirdCoordinate;
 
-        public pointCoordinates(int x, int y, int z) {
+        public pointCoordinates(int firstCoordinate, int secondCoordinate, int thirdCoordinate) {
             super();
-            this.x = x;
-            this.y = y;
-            this.z = z;
+            this.firstCoordinate =firstCoordinate;
+            this.secondCoordinate =secondCoordinate;
+            this.thirdCoordinate= thirdCoordinate;
         }
     };
 
@@ -30,43 +30,43 @@ public class ShortestPath {
 
     static int BFS(int matrix[][], int k, pair source, pair destination) {
 
-        Queue<pointCoordinates> q = new LinkedList<pointCoordinates>();
+        Queue<pointCoordinates> pointCoordinates = new LinkedList<pointCoordinates>();
         int[][] distance = new int[row][col];
         int[][] obstacles = new int[row][col];
-        q.add(new pointCoordinates(source.first, source.second,k));
-        while (!q.isEmpty()) {
-            pointCoordinates test = q.peek();
-            int x = test.x;
-            int y = test.y;
-            int testCoordinates =  test.z;
-            if (x == destination.first && y == destination.second)
-                return distance[x][y];
-            q.remove();
-            if (matrix[x][y] == 1) {
-                if (testCoordinates > 0)
-                    testCoordinates--;
+        pointCoordinates.add(new pointCoordinates(source.first, source.second,k));
+        while (!pointCoordinates.isEmpty()) {
+            pointCoordinates point = pointCoordinates.peek();
+            int firstCoordinate = point.firstCoordinate;
+            int secondCoordinate = point.secondCoordinate;
+            int thirdCoordinate =  point.thirdCoordinate;
+            if (firstCoordinate == destination.first && secondCoordinate == destination.second)
+                return distance[firstCoordinate][secondCoordinate];
+            pointCoordinates.remove();
+            if (matrix[firstCoordinate][secondCoordinate] == 1) {
+                if (thirdCoordinate > 0)
+                   thirdCoordinate--;
                 else
                     continue;
             }
-            if (obstacles[x][y] >= testCoordinates)
+            if (obstacles[firstCoordinate][secondCoordinate] >= thirdCoordinate)
                 continue;
-            obstacles[x][y] = testCoordinates;
+            obstacles[firstCoordinate][secondCoordinate] = thirdCoordinate;
             for (int i = 0; i < 4; i++) {
-                int ax = x + dim_row[i];
-                int ay = y + dim_col[i];
-                if (ax < 0 || ay < 0 || ax >= row || ay >= col)
+                int firstDimension = firstCoordinate + dim_row[i];
+                int secondDimension = secondCoordinate + dim_col[i];
+                if (firstDimension < 0 || secondDimension < 0 || firstDimension >= row || secondDimension >= col)
                     continue;
-                q.add(new pointCoordinates(ax, ay, testCoordinates));
-                distance[ax][ay] = distance[x][y] + 1;
+                pointCoordinates.add(new pointCoordinates(firstDimension,secondDimension, thirdCoordinate));
+                distance[firstDimension][secondDimension] = distance[firstCoordinate][secondCoordinate] + 1;
             }
         }
         return -1;
     }
     public static void main(String[] args) {
         int matrix[][] = {{0, 0, 1}, {1, 0, 1}, {0, 1, 0}};
-        int k = 2;
+        int noOfPoints = 2;
         pair source = new pair(0, 0);
         pair destination = new pair(2, 2);
-        System.out.print(BFS(matrix, k, source, destination));
+        System.out.print(BFS(matrix, noOfPoints, source, destination));
     }
 }
