@@ -5,7 +5,6 @@ This is the Java repository which contains two coding problems
 #### **Instructions**
 
 Clone the repo:
-Git:
 $ git clone git@github.com:XI754-AbhishekDalakoti/Aspiration-Encora.git
 
 #### **Prerequisites**
